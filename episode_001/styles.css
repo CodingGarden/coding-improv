@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  --font-color: #000500;
+  font-size: 32px;
+  background: #C4E0F9;
+  color: var(--font-color);
+  font-family: 'Raleway', sans-serif;
+}
+
+body.dark-mode {
+  --font-color: #FFF;
+  background: #000500;
+}
+
+header {
+  text-align: center;
+}
+
+header h1 {
+  margin: 2rem 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bitter', serif;
+}
+
+main {
+  width: 60%;
+  margin: 2rem auto 3.75rem auto;
+}
+
+.card {
+  border: 2px solid var(--font-color);
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #B95F89;
+  color: white;
+}
+
+.card img {
+  margin: 1rem;
+  max-height: 220px;
+  border: 2px solid var(--font-color);
+}
+
+body.dark-mode .card {
+  background: #727072;
+  color: white;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  background: black;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  margin: 1rem 0 0 0;
+  justify-content: space-between;
+}
+
+button {
+  width: 5rem;
+  height: 5rem;
+  font-size: 4rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+button.like {
+  background: #EB6424;
+}
+
+button.dislike {
+  background: #087CA7;
+}
+
+#darkModeButton {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
+body.dark-mode #darkModeButton {
+  background: rebeccapurple;
+}
+
+body #darkModeButton {
+  background: #00AF54;
+}

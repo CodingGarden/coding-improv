@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chicken Tender</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-mode">
+  <button id="darkModeButton">☀️</button>
+  <main id="app">
+    <div class="card">
+      <h3>{{currentChicken.name}}</h3>
+      <img :src="currentChicken.image">
+      <p>{{currentChicken.bio}}</p>
+     <div class="buttons">
+       <button class="dislike" @click="currentChickenIndex++">🐲</button>
+       <button class="like" @click="currentChickenIndex++">🍍</button>
+     </div>
+    </div>
+  </main>
+  <footer>
+    Made with 💚 by Coding Garden
+  </footer>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
