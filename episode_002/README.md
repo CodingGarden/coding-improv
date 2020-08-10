@@ -1,12 +1,19 @@
 # CODING IMPROV - Episode 2
 
-* [ ] justsnaf - Tournament
+## Theme
+
+* [x] justsnaf - Tournament
+
+## Ideas
+
+* [x] ImTomEddy - United-Kingdom
+* [x] await3d - Netherlands
+
 * [ ] GuanTheThird - explosion
-* [ ] pepeok12 - Tacos!
-* [ ] ImTomEddy - United-Kingdom
-* [ ] TurboBiscuit_ - banana
-* [ ] joshcoopertech - Ketchup
+* [ ] pepeok12 - Tacos! 🌮
+* [ ] TurboBiscuit_ - banana 🍌
+* [ ] joshcoopertech - Ketchup 🍅
+* [ ] skycolorx - dolphin
+
 * [ ] Shaayan - university
 * [ ] adrpala93 - climbing
-* [ ] skycolorx - dolphin
-* [ ] await3d - Netherlands
