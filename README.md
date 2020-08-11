@@ -19,5 +19,7 @@ All features of the things we build are influenced by chat suggestions.
 
 ## Episode 2
 
-* TBD
+* FOOD FIGHT: Country Edition
 * View the code [here](./episode_002)
+* View the site [here](https://country-food-fight.surge.sh/?channel=codinggarden)
+* View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/706534982)
