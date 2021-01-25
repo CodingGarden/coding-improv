@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIF KEBAB 🍡</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo">GIF KEBAB 🍡</a>
+      </div>
+    </nav>
+  </header>
+  <main class="container">
+    <p>
+      Welcome to GIF KEBAB!
+      <ol>
+        <li>The first gif you see is retrieved from the giphy api using one of these random terms: cola, kebab, arrow, soccer, wasps, dog</li>
+        <li>After that, we use ml5.js with the ImageClassifier to classify the gif.</li>
+        <li>You can then choose one of the classifications to get another random gif.</li>
+        <li>Repeat.</li>
+      </ol>
+      <small>This app was coded in front of a live twitch audience. See all of the past episodes <a href="https://www.youtube.com/playlist?list=PLM_i0obccy3un5DwQw-wRq0QvoH1P_Wk0">here.</a></small>
+    </p>
+    <div id="kebab">
+
+    </div>
+    <div id="loading">
+      <img src="https://i.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.webp">
+    </div>
+  </main>
+  <script type="module" src="src/index.js"></script>
+</body>
+</html>

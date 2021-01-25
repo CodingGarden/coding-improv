@@ -1,0 +1,36 @@
+* {
+  scroll-behavior: smooth;
+}
+
+#loading {
+  text-align: center;
+}
+
+#kebab {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.image-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.image-wrapper img {
+  margin: 1rem;
+  max-width: 90%;
+}
+
+.image-wrapper button {
+  margin: 0.5rem;
+}
+
+.arrow {
+  margin: 0;
+  padding: 0;
+  font-size: 10rem;
+}
