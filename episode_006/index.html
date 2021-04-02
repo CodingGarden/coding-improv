@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOL AI Guesser</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .image-inner-container {
+      overflow: hidden;
+      width: 60vw;
+    }
+    img {
+      width: 100%;
+      transform-origin: 0 0;
+      transition: all 1s ease-in-out;
+    }
+    #buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    button {
+      margin: 1rem;
+      font-size: 2rem;
+    }
+    #correct-score, #wrong-score {
+      font-weight: bold;
+    }
+    .approved {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .hidden {
+      display: none;
+    }
+    .oated {
+      height: 90%;
+      width: auto;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: rotate(35deg);
+    }
+  </style>
+</head>
+<body>
+  <h1>LOL AI Guesser</h1>
+  <div>
+    Correct Guesses: <span id="correct-score">0</span>
+  </div>
+  <div>
+    Wrong Guesses: <span id="wrong-score">0</span>
+  </div>
+  <div class="image-container">
+    <div class="image-inner-container">
+      <img id="image">
+    </div>
+  </div>
+  <div id="buttons"></div>
+  <img class="approved hidden" src="https://www.onlygfx.com/wp-content/uploads/2016/09/green-approved-stamp-1-1024x772.png" alt="">
+  <img class="oated hidden" src="https://cdn0.rubylane.com/shops/ruthsredemptions/QWKRTN.1L.jpg" alt="">
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
