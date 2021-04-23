@@ -13,7 +13,7 @@
 ## Suggestions
 
 * [x] Squidoz - LeagueOfLegends
-* [ ] potatisgrizen - Potato
+* [x] potatisgrizen - Potato
 * [x] HelonMusk_ - Hardware
 * [x] michalisgar - AI
 * [x] DropManiaOfficial - Piano
