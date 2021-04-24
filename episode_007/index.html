@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>three.js webgl - materials - dynamic cube reflection</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link type="text/css" rel="stylesheet" href="main.css" />
+    <style>
+      body {
+        touch-action: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="info">
+      Photo by
+      <a
+        href="https://hdrihaven.com/hdri/?h=chinese_garden"
+        target="_blank"
+        rel="noopener"
+        >Andreas Mischok</a
+      >.
+    </div>
+
+    <script src="tmi.min.js"></script>
+    <script type="module">
+      import * as THREE from "./three.module.js";
+
+      let camera, scene, renderer, textGeo;
+      let cube, material, group, font;
+      const textInfos = [];
+      const meshes = [];
+
+      let count = 0,
+        cubeCamera1,
+        cubeCamera2,
+        cubeRenderTarget1,
+        cubeRenderTarget2;
+
+      let onPointerDownPointerX,
+        onPointerDownPointerY,
+        onPointerDownLon,
+        onPointerDownLat;
+
+      let lon = 0,
+        lat = 0;
+      let phi = 0,
+        theta = 0;
+
+      const textureLoader = new THREE.TextureLoader();
+
+      textureLoader.load("textures/chinese_garden.jpg", function (texture) {
+        texture.encoding = THREE.sRGBEncoding;
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+
+        init(texture);
+        animate();
+      });
+
+      function loadFont(fontName, fontWeight) {
+        const loader = new THREE.FontLoader();
+        return new Promise((resolve) => {
+          loader.load(
+            "fonts/" + fontName + "_" + fontWeight + ".typeface.json",
+            resolve
+          );
+        });
+      }
+
+      function addText(text, font, position, rotation, offsetDimension = "x") {
+        textGeo = new THREE.TextGeometry(text, {
+          font,
+          size: 5,
+          height: 2,
+          curveSegments: 4,
+          bevelThickness: 0.5,
+          bevelSize: 0.25,
+          bevelEnabled: true,
+        });
+
+        textGeo.computeBoundingBox();
+
+        const centerOffset =
+          -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
+
+        const textMesh = new THREE.Mesh(textGeo, [
+          new THREE.MeshPhongMaterial({ color: 0x00ff00, flatShading: true }), // front
+          new THREE.MeshPhongMaterial({ color: 0x000000 }), // side
+        ]);
+
+        const xOffset =
+          offsetDimension === "x"
+            ? centerOffset
+            : offsetDimension === "-x"
+            ? -centerOffset
+            : 0;
+        const yOffset =
+          offsetDimension === "y"
+            ? centerOffset
+            : offsetDimension === "-y"
+            ? -centerOffset
+            : 0;
+        const zOffset =
+          offsetDimension === "z"
+            ? centerOffset
+            : offsetDimension === "-z"
+            ? -centerOffset
+            : 0;
+
+        textMesh.position.x = position.x + xOffset;
+        textMesh.position.y = position.y + yOffset;
+        textMesh.position.z = position.z + zOffset;
+
+        textMesh.rotation.x = rotation.x;
+        textMesh.rotation.y = rotation.y;
+        textMesh.rotation.z = rotation.z;
+
+        group.add(textMesh);
+        return textMesh;
+      }
+
+      async function init(texture) {
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        document.body.appendChild(renderer.domElement);
+
+        scene = new THREE.Scene();
+        scene.background = texture;
+
+        camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          1,
+          1000
+        );
+
+        cubeRenderTarget1 = new THREE.WebGLCubeRenderTarget(256, {
+          format: THREE.RGBFormat,
+          generateMipmaps: true,
+          minFilter: THREE.LinearMipmapLinearFilter,
+          encoding: THREE.sRGBEncoding, // temporary -- to prevent the material's shader from recompiling every frame
+        });
+
+        cubeCamera1 = new THREE.CubeCamera(1, 1000, cubeRenderTarget1);
+
+        cubeRenderTarget2 = new THREE.WebGLCubeRenderTarget(256, {
+          format: THREE.RGBFormat,
+          generateMipmaps: true,
+          minFilter: THREE.LinearMipmapLinearFilter,
+          encoding: THREE.sRGBEncoding,
+        });
+
+        cubeCamera2 = new THREE.CubeCamera(1, 1000, cubeRenderTarget2);
+
+        material = new THREE.MeshBasicMaterial({
+          envMap: cubeRenderTarget2.texture,
+          combine: THREE.MultiplyOperation,
+          reflectivity: 1,
+        });
+
+        const axesHelper = new THREE.AxesHelper(200);
+        scene.add(axesHelper);
+
+        group = new THREE.Group();
+
+        cube = new THREE.Mesh(new THREE.BoxGeometry(50, 50, 50), material);
+        group.add(cube);
+
+        font = await loadFont("helvetiker", "regular");
+
+        textInfos.push({
+          position: {
+            x: 0,
+            y: 0,
+            z: 25,
+          },
+          rotation: {
+            x: 0,
+            y: Math.PI * 2,
+            z: 0,
+          },
+        });
+
+        textInfos.push({
+          position: {
+            x: 0,
+            y: 25,
+            z: 0,
+          },
+          rotation: {
+            x: -Math.PI / 2,
+            y: 0,
+            z: 0,
+          },
+        });
+
+        textInfos.push({
+          position: {
+            x: 0,
+            y: 0,
+            z: -25,
+          },
+          rotation: {
+            x: 0,
+            y: Math.PI,
+            z: 0,
+          },
+          offset: "-x",
+        });
+
+        textInfos.push({
+          position: {
+            x: -25,
+            y: 0,
+            z: 0,
+          },
+          rotation: {
+            x: 0,
+            y: -Math.PI / 2,
+            z: 0,
+          },
+          offset: "z",
+        });
+
+        textInfos.push({
+          position: {
+            x: 25,
+            y: 0,
+            z: 0,
+          },
+          rotation: {
+            x: 0,
+            y: Math.PI / 2,
+            z: 0,
+          },
+          offset: "-z",
+        });
+
+        textInfos.push({
+          position: {
+            x: 0,
+            y: -25,
+            z: 0,
+          },
+          rotation: {
+            x: Math.PI / 2,
+            y: 0,
+            z: 0,
+          },
+          offset: "x",
+        });
+
+        textInfos.forEach((info, index) => {
+          const textmesh = addText(
+            `!cubesuggest`,
+            font,
+            info.position,
+            info.rotation,
+            info.offset
+          );
+          meshes.push(textmesh);
+        });
+
+        const light = new THREE.AmbientLight(0x404040);
+        scene.add(light);
+
+        scene.add(group);
+
+        document.addEventListener("pointerdown", onPointerDown);
+        document.addEventListener("wheel", onDocumentMouseWheel);
+
+        window.addEventListener("resize", onWindowResized);
+      }
+
+      function onWindowResized() {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      }
+
+      function onPointerDown(event) {
+        event.preventDefault();
+
+        onPointerDownPointerX = event.clientX;
+        onPointerDownPointerY = event.clientY;
+
+        onPointerDownLon = lon;
+        onPointerDownLat = lat;
+
+        document.addEventListener("pointermove", onPointerMove);
+        document.addEventListener("pointerup", onPointerUp);
+      }
+
+      function onPointerMove(event) {
+        lon = (event.clientX - onPointerDownPointerX) * 0.1 + onPointerDownLon;
+        lat = (event.clientY - onPointerDownPointerY) * 0.1 + onPointerDownLat;
+      }
+
+      function onPointerUp() {
+        document.removeEventListener("pointermove", onPointerMove);
+        document.removeEventListener("pointerup", onPointerUp);
+      }
+
+      function onDocumentMouseWheel(event) {
+        const fov = camera.fov + event.deltaY * 0.05;
+
+        camera.fov = THREE.MathUtils.clamp(fov, 10, 75);
+
+        camera.updateProjectionMatrix();
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        render();
+      }
+
+      function render() {
+        const time = Date.now();
+
+        lon += 0.15;
+
+        lat = Math.max(-85, Math.min(85, lat));
+        phi = THREE.MathUtils.degToRad(90 - lat);
+        theta = THREE.MathUtils.degToRad(lon);
+
+        group.position.x = Math.cos(time * 0.001) * 1;
+        group.position.y = Math.sin(time * 0.001) * 1;
+        group.position.z = Math.sin(time * 0.001) * 1;
+
+        group.rotation.x += 0.01;
+        group.rotation.y += 0.01;
+
+        camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
+        camera.position.y = 100 * Math.cos(phi);
+        camera.position.z = 100 * Math.sin(phi) * Math.sin(theta);
+
+        camera.lookAt(scene.position);
+
+        // pingpong
+
+        if (count % 2 === 0) {
+          cubeCamera1.update(renderer, scene);
+          material.envMap = cubeRenderTarget1.texture;
+        } else {
+          cubeCamera2.update(renderer, scene);
+          material.envMap = cubeRenderTarget2.texture;
+        }
+
+        count++;
+
+        renderer.render(scene, camera);
+      }
+
+      const client = new tmi.Client({
+        connection: { reconnect: true },
+        channels: ["codinggarden"],
+      });
+
+      client.connect();
+
+      client.on("message", (channel, tags, message, self) => {
+        if (self) return;
+
+        const [command, ...args] = message.split(' ');
+        if (command === '!cubesuggest') {
+          const suggestion = args.join(' ');
+          const randomSide = Math.floor(Math.random() * 6);
+          const mesh = meshes[randomSide];
+          const info = textInfos[randomSide];
+          group.remove(mesh);
+          const textMesh = addText(suggestion, font, info.position, info.rotation, info.offset);
+          meshes[randomSide] = textMesh;
+        }
+      });
+    </script>
+  </body>
+</html>
