@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonzi MacBook Clicker</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <div class="macbook">
+      <img class="macbook-image" src="macbook.png">
+      <div class="desktop">
+        <img class="desktop-background" src="https://i.pinimg.com/originals/20/5f/df/205fdf65eef6a30cb23365d6230f2d3d.jpg">
+        <div class="desktop-navbar">
+          <img class="desktop-navbar-logo" src="https://findicons.com/files/icons/734/phuzion/128/apple.png">
+          <div class="desktop-navbar-menu-items">
+            <div class="menu-item" style="font-weight: bold;">Finder</div>
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">Window</div>
+            <div class="menu-item">View</div>
+            <div class="menu-item">Help</div>
+          </div>
+          <div class="desktop-navbar-status">
+            <div class="desktop-navbar-status-battery">
+              <img src="battery.png">
+              <div class="battery-percent-container">
+                <div class="battery-percent"></div>
+              </div>
+            </div>
+            <div class="status-item"><span class="percent">100%</span></div>
+            <div class="status-item">Score: <span class="score">0</span></div>
+          </div>
+        </div>
+        <div class="desktop-icons"></div>
+        <div class="game-over">
+          <h3>GAME OVER</h3>
+          <img src="low-battery.png">
+          <span class="stats"></span>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

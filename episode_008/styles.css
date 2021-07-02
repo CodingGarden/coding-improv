@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #DDDDDD;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  cursor: not-allowed;
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.macbook {
+  width: 100vmin;
+  position: relative;
+}
+
+.macbook-image {
+  width: 100%;
+  height: auto;
+}
+
+.desktop {
+  position: absolute;
+  top: 3vmin;
+  left: 12vmin;
+  width: 76.5%;
+  height: 83%;
+  cursor: url(bonzi-cursor.png) 5 5, pointer;
+  transition: filter 500ms;
+}
+
+.desktop-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.desktop-navbar {
+  position: absolute;
+  width: 100%;
+  height: 7%;
+  top: 0;
+  background: linear-gradient(#F1F1F1, #C0BFBB);
+  display: flex;
+  align-items: center;
+  font-size: 2vmin;
+  user-select: none;
+}
+
+.desktop-icons {
+  position: absolute;
+  width: 100%;
+  height: 93%;
+  top: 7%;
+  overflow: hidden;
+}
+
+.desktop-navbar-logo {
+  height: 80%;
+}
+
+.desktop-navbar-menu-items {
+  display: flex;
+}
+
+.menu-item {
+  margin: 0 1vmin;
+}
+
+.desktop-navbar-status {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.desktop-navbar-status-battery {
+  height: 2vmin;
+  position: relative;
+}
+
+.desktop-navbar-status-battery img {
+  height: 100%;
+  width: auto;
+}
+
+.battery-percent-container {
+  height: 65%;
+  width: 73.5%;
+  position: absolute;
+  top: 19%;
+  left: 11%;
+}
+
+.battery-percent {
+  background: #2FBF41;
+  height: 100%;
+  width: 100%;
+}
+
+.status-item {
+  margin: 0 1vmin;
+}
+
+.desktop-icon {
+  position: absolute;
+  width: 5vmin;
+  height: auto;
+}
+
+.game-over {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+}
+
+.game-over img {
+  width: 40%;
+}
