@@ -24,7 +24,7 @@ body {
 	text-shadow: 0px 0px 10px #56BC58;
 }
 
-#definition, #guesser {
+#definition, #guesser, #winners {
   font-size: 2vmin;
   color: white;
   text-shadow: 0px 0px 5px #56BC58;
