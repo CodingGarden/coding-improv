@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #1A1423;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game {
+  width: 100vmin;
+  height: 70vmin;
+  outline: 10px solid black;
+  overflow: hidden;
+}
+
+.clouds {
+  height: 70%;
+  width: 100%;
+  background: linear-gradient(#5465FF, #FEA82F 80%);
+  position: relative;
+}
+
+.road {
+  height: 30%;
+  width: 100%;
+  background: #898989;
+  position: relative;
+}
+
+.score {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 3vmin;
+  color: #1A1423;
+  font-weight: bold;
+  position: absolute;
+  top: 1vmin;
+  right: 1vmin;
+}
+
+.cloud {
+  width: 30vmin;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  position: absolute;
+}
+
+.dino {
+  height: 120%;
+  position: absolute;
+  z-index: 100;
+  /* outline: 10px solid red; */
+}
+
+.road-line {
+  width: 20%;
+  height: 10%;
+  background: #fffaf1;
+  position: absolute;
+  z-index: 1;
+}
+
+.food {
+  width: 15%;
+  z-index: 2;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  position: absolute;
+  /* outline: 10px solid red; */
+}
