@@ -1,0 +1,12 @@
+.order {
+  position: absolute;
+  left: 350px;
+  top: 30px;
+  width: 195px;
+  height: 120px;
+  color: white;
+  padding: 10px;
+  border: 5px solid #7E773A;
+  opacity: 0.8;
+  background: linear-gradient(to bottom, #6d6b58, #1B1C1A);
+}
