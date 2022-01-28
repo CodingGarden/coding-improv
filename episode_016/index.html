@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      position: relative;
+    }
+    canvas {
+      transform: scale(0.95);
+    }
+
+    .flag {
+      z-index: 100;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+    }
+
+    #score {
+      z-index: 100;
+      position: fixed;
+      top: 10rem;
+      left: 1rem;
+    }
+
+    .dragon {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 200;
+      transform: scale(10);
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+<body>
+  <img class="flag" src="images/norwayflag.gif">
+  <div id="score"></div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
