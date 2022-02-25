@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.25vh;
+  background-position: center;
+  background-size: cover;
+  background-image: url(https://images.pexels.com/photos/164005/pexels-photo-164005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+.page {
+  background: white;
+}
+
+.recipe-info {
+  display: flex;
+}
+
+.turn-page-wrapper {
+  border-radius: 10px;
+}
+
+.info {
+  padding: 0.5rem;
+}
+
+.right, .left {
+  width: 50%;
+  padding: 0.5rem;
+}
+
+.recipe-image {
+  width: 100%;
+}
+
+footer {
+  color: white;
+}
