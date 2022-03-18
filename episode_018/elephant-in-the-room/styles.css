@@ -32,7 +32,7 @@ body {
   display: inline-flex;
   flex-direction: column;
   outline: 1px solid #75C9C8;
-  font-size: 2rem;
+  font-size: 2.8vmin;
   justify-content: center;
   align-items: center;
 }
@@ -40,7 +40,7 @@ body {
 .cell:after {
   content: attr(data-col) ", " attr(data-row);
   color:#75C9C8;
-  font-size: 1.5rem;
+  font-size: 2.8vmin;
 }
 
 .cell.hit:after, .cell.miss:after {

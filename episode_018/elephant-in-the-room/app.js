@@ -14,66 +14,67 @@ for (let row = 0; row < 10; row += 1) {
   }
 }
 
-const elephants = [
-  {
-    size: 1,
-    url: 'https://lh3.googleusercontent.com/cpXgMMW7cGhwk5ODJxZkXn_W_bqXA3VMuvLH7eGUAljK36q5La__cFoRIHMpK-Y3L3UcpLf-c3eTcaerh2U7YiuJ-4wBJBz7UdVWRw=w280',
-  },
-  {
-    size: 2,
-    url: 'https://lh3.googleusercontent.com/NpP2RTxO3p8SzoaJUKsVjF_AW7R7okMa0l79J4V3EmXQHBxmmMmicorP8jNUNiapbYdZXomRebyo54IBaNoo-KjEvB6Mu-K82t563Q=w280',
-  },
-  {
-    size: 3,
-    url: 'https://lh3.googleusercontent.com/lMMba8Ddl3XxAoI8f6DWV_Bp7JzRMJ6uWdHzMtJa_MHgh56LHbiszRhR1-xik1uHZjAKce_ADvvPVJ2iepUkW8hUXqHpiSjPzxHLbA=w280',
-  },
-  {
-    size: 3,
-    url: 'https://lh3.googleusercontent.com/rJO5EediBkcetfiTjiZBVo-pict_0_GKRjZmYpx4j9vTl0Bey48bM83wpBtlx_L2M0RboEqxfe5CNlniCndx_FArRXqZNHahnfjd=w280',
-  },
-].reverse();
-
-function getRandomCoordinates(size, others) {
-  const x = 1 + Math.floor(Math.random() * (11 - size));
-  const y = 1 + Math.floor(Math.random() * (11 - size));
-  if (
-    others.every(
-      (otherElephant) => !(
-        x < otherElephant.x + otherElephant.size
-          && x + size > otherElephant.x
-          && y < otherElephant.y + otherElephant.size
-          && size + y > otherElephant.y
-      ),
-    )
-  ) {
+async function getRandomElephants() {
+  const allElephantsArray = allElephants.data.query.search.edges;
+  const elephants = [3, 3, 2, 1].map((size) => {
+    const randomIndex = Math.floor(Math.random() * allElephantsArray.length);
+    const [randomElement] = allElephantsArray.splice(randomIndex, 1);
     return {
-      x,
-      y,
+      size,
+      url: randomElement.node.asset.imageUrl,
     };
+  });
+
+  function getRandomCoordinates(size, others) {
+    const x = 1 + Math.floor(Math.random() * (11 - size));
+    const y = 1 + Math.floor(Math.random() * (11 - size));
+    if (
+      others.every(
+        (otherElephant) => !(
+          x < otherElephant.x + otherElephant.size
+            && x + size > otherElephant.x
+            && y < otherElephant.y + otherElephant.size
+            && size + y > otherElephant.y
+        ),
+      )
+    ) {
+      return {
+        x,
+        y,
+      };
+    }
+    return getRandomCoordinates(size, others);
   }
-  return getRandomCoordinates(size, others);
+
+  elephants.forEach((elephant) => {
+    elephant.hits = 0;
+    elephant.totalHits = elephant.size * elephant.size;
+    const others = elephants.filter(
+      (other) => other !== elephant && other.x && other.y,
+    );
+    const { x, y } = getRandomCoordinates(elephant.size, others);
+    elephant.x = x;
+    elephant.y = y;
+    const imgWrapper = document.createElement('div');
+    imgWrapper.classList.add('image-wrapper');
+    imgWrapper.style.gridRow = elephant.y;
+    imgWrapper.style.gridRowEnd = elephant.y + elephant.size;
+    imgWrapper.style.gridColumn = elephant.x;
+    imgWrapper.style.gridColumnEnd = elephant.x + elephant.size;
+    const img = document.createElement('img');
+    img.src = elephant.url;
+    elephant.element = img;
+    imgWrapper.append(img);
+    gameBoard.append(imgWrapper);
+  });
+
+  return elephants;
 }
 
-elephants.forEach((elephant) => {
-  elephant.hits = 0;
-  elephant.totalHits = elephant.size * elephant.size;
-  const others = elephants.filter(
-    (other) => other !== elephant && other.x && other.y,
-  );
-  const { x, y } = getRandomCoordinates(elephant.size, others);
-  elephant.x = x;
-  elephant.y = y;
-  const imgWrapper = document.createElement('div');
-  imgWrapper.style.gridRow = elephant.y;
-  imgWrapper.style.gridRowEnd = elephant.y + elephant.size;
-  imgWrapper.style.gridColumn = elephant.x;
-  imgWrapper.style.gridColumnEnd = elephant.x + elephant.size;
-  const img = document.createElement('img');
-  img.src = elephant.url;
-  elephant.element = img;
-  imgWrapper.append(img);
-  gameBoard.append(imgWrapper);
-});
+getRandomElephants()
+  .then((elephants) => {
+    init(elephants);
+  });
 
 const client = new tmi.Client({
   channels: ['codinggarden'],
@@ -87,6 +88,7 @@ const gameState = {
   guessing: true,
   timerEnd: Date.now() + (guessLength),
   guessedCells: new Set(),
+  foundElephants: 0,
 };
 
 const hasVoted = new Set();
@@ -118,52 +120,65 @@ client.on('message', (channel, tags, message) => {
   }
 });
 
-setInterval(() => {
-  if (gameState.guessing) {
-    const secondsLeft = Math.floor((gameState.timerEnd - Date.now()) / 1000);
-    timerElement.textContent = `0:${secondsLeft.toString().padStart(2, '0')}`;
-    if (secondsLeft <= 0) {
-      gameState.guessing = false;
-      const votesArray = [...votes];
-      if (votesArray.length) {
-
-        let [[mostVotedCoord, mostNumVotes]] = votesArray;
-        votesArray.forEach(([coord, numVotes]) => {
-          if (numVotes > mostNumVotes) {
-            mostNumVotes = numVotes;
-            mostVotedCoord = coord;
-          }
-        });
-        gameState.guessedCells.add(mostVotedCoord);
-        const [column, row] = mostVotedCoord.split(',');
-        const cell = document.querySelector(`#cell-${column}-${row}`);
-        let wasHit = false;
-        elephants.forEach((elephant) => {
-          if (column >= elephant.x
-            && column <= elephant.x + (elephant.size - 1)
-            && row >= elephant.y
-            && row <= elephant.y + (elephant.size - 1)) {
-            elephant.hits += 1;
-            wasHit = true;
-            if (elephant.hits === elephant.totalHits) {
-              elephant.element.style.opacity = '1';
+function init(elephants) {
+  setInterval(() => {
+    if (gameState.guessing) {
+      const secondsLeft = Math.floor((gameState.timerEnd - Date.now()) / 1000);
+      timerElement.textContent = `0:${secondsLeft.toString().padStart(2, '0')}`;
+      if (secondsLeft <= 0) {
+        gameState.guessing = false;
+        const votesArray = [...votes];
+        if (votesArray.length) {
+          let [[mostVotedCoord, mostNumVotes]] = votesArray;
+          votesArray.forEach(([coord, numVotes]) => {
+            if (numVotes > mostNumVotes) {
+              mostNumVotes = numVotes;
+              mostVotedCoord = coord;
             }
-            console.log('HIT', elephant);
+          });
+          gameState.guessedCells.add(mostVotedCoord);
+          const [column, row] = mostVotedCoord.split(',');
+          const cell = document.querySelector(`#cell-${column}-${row}`);
+          let wasHit = false;
+          elephants.forEach((elephant) => {
+            if (column >= elephant.x
+              && column <= elephant.x + (elephant.size - 1)
+              && row >= elephant.y
+              && row <= elephant.y + (elephant.size - 1)) {
+              elephant.hits += 1;
+              wasHit = true;
+              if (elephant.hits === elephant.totalHits) {
+                elephant.element.style.opacity = '1';
+                gameState.foundElephants += 1;
+              }
+              console.log('HIT', elephant);
+            }
+          });
+          if (wasHit) {
+            cell.classList.add('hit');
+          } else {
+            cell.classList.add('miss');
           }
-        });
-        if (wasHit) {
-          cell.classList.add('hit');
+        }
+        if (gameState.foundElephants === elephants.length) {
+          document.querySelectorAll('.cell').forEach((element) => {
+            element.classList.add('miss');
+            element.textContent = '';
+          });
+          timerElement.textContent = 'You found them all! New game starting soon...';
+          setTimeout(() => {
+            window.location = '/';
+          }, 10 * 1000);
         } else {
-          cell.classList.add('miss');
+          gameState.timerEnd = Date.now() + (guessLength);
+          gameState.guessing = true;
+          votes.clear();
+          hasVoted.clear();
+          document.querySelectorAll('.cell').forEach((element) => {
+            element.textContent = '';
+          });
         }
       }
-      gameState.timerEnd = Date.now() + (guessLength);
-      gameState.guessing = true;
-      votes.clear();
-      hasVoted.clear();
-      document.querySelectorAll('.cell').forEach((element) => {
-        element.textContent = '';
-      });
     }
-  }
-}, 500);
+  }, 500);
+}
