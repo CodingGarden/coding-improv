@@ -55,3 +55,10 @@ All features of the things we build are influenced by chat suggestions.
 - Community Cube
 - View the code [here](./episode_007)
 - View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/1022368864)
+
+## Episode 8
+
+- Bonzi Macbook Clicker
+- View the code [here](./episode_008)
+- View the site [here](http://bonzi-clicker.surge.sh/)
+- View the live stream VOD on YouTube [here](https://youtu.be/dMHrIhbtuXY)
