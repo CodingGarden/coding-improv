@@ -90,3 +90,9 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_012)
 - View the site [here](http://aliens-as-a-service.surge.sh)
 - View the live stream VOD on YouTube [here](https://youtu.be/F1sWcv9NHUM)
+
+## Episode 13
+
+- Chat Controlled Equilibrium Scale Game
+- View the code [here](./episode_013)
+- View the live stream VOD on YouTube [here](https://youtu.be/Rx5yUa503k4)
