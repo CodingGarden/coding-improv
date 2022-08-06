@@ -42,3 +42,10 @@ All features of the things we build are influenced by chat suggestions.
 - Guess the Password Overlay
 - View the code [here](./episode_005)
 - View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/999210888)
+
+## Episode 6
+
+- League of Legends AI Guesser
+- View the code [here](./episode_006)
+- View the site [here](http://lol-ai-guesser.surge.sh)
+- View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/1022387017)
