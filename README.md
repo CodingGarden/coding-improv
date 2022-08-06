@@ -123,3 +123,9 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_017)
 - View the site [here](http://popcorn-recipes.surge.sh)
 - View the live stream VOD on YouTube [here](https://youtu.be/mNv-0lKwjuk)
+
+## Episode 18
+
+- NFT Battleship
+- View the code [here](./episode_018)
+- View the live stream VOD on YouTube [here](https://youtu.be/V3Je_H4DDnc)
