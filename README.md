@@ -49,3 +49,9 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_006)
 - View the site [here](http://lol-ai-guesser.surge.sh)
 - View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/1022387017)
+
+## Episode 7
+
+- Community Cube
+- View the code [here](./episode_007)
+- View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/1022368864)
