@@ -69,3 +69,10 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_009)
 - View the site [here](http://flip-schwap.surge.sh)
 - View the live stream VOD on YouTube [here](https://youtu.be/GtcWY40HPWY)
+
+## Episode 10
+
+- Retro Dino Waffle Jump Game
+- View the code [here](./episode_010)
+- View the site [here](http://retro-dino-waffle-jump.surge.sh)
+- View the live stream VOD on YouTube [here](https://youtu.be/5hn1HdDhLQo)
