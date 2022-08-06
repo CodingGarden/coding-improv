@@ -36,3 +36,9 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_004)
 - View the site [here](https://gif-kebab.surge.sh/)
 - View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/887587488)
+
+## Episode 5
+
+- Guess the Password Overlay
+- View the code [here](./episode_005)
+- View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/999210888)
