@@ -62,3 +62,10 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_008)
 - View the site [here](http://bonzi-clicker.surge.sh/)
 - View the live stream VOD on YouTube [here](https://youtu.be/dMHrIhbtuXY)
+
+## Episode 9
+
+- Emoji Memory Matching Game
+- View the code [here](./episode_009)
+- View the site [here](http://flip-schwap.surge.sh)
+- View the live stream VOD on YouTube [here](https://youtu.be/GtcWY40HPWY)
