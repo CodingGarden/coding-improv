@@ -83,3 +83,10 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_011)
 - View the site [here](http://kitten-keys.surge.sh)
 - View the live stream VOD on YouTube [here](https://youtu.be/SQvCwOQvSJQ)
+
+## Episode 12
+
+- Aliens As A Service
+- View the code [here](./episode_012)
+- View the site [here](http://aliens-as-a-service.surge.sh)
+- View the live stream VOD on YouTube [here](https://youtu.be/F1sWcv9NHUM)
