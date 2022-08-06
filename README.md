@@ -116,3 +116,10 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_016)
 - View the site [here](http://ultimate-frog-dragon-pants-jump.surge.sh)
 - View the live stream VOD on YouTube [here](https://youtu.be/1gAU6G2DRiM)
+
+## Episode 17
+
+- Popcorn Recipe Book
+- View the code [here](./episode_017)
+- View the site [here](http://popcorn-recipes.surge.sh)
+- View the live stream VOD on YouTube [here](https://youtu.be/mNv-0lKwjuk)
