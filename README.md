@@ -96,3 +96,10 @@ All features of the things we build are influenced by chat suggestions.
 - Chat Controlled Equilibrium Scale Game
 - View the code [here](./episode_013)
 - View the live stream VOD on YouTube [here](https://youtu.be/Rx5yUa503k4)
+
+## Episode 14
+
+- Overbrewed Game
+- View the code [here](./episode_014)
+- View the site [here](http://overbrewed.surge.sh)
+- View the live stream VOD on YouTube [here](https://youtu.be/t0q18GQUs38)
