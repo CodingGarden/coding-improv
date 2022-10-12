@@ -1,0 +1,29 @@
+body {
+  font-family: sans-serif;
+  font-size: 2rem;
+  background: black;
+  color: white;
+}
+
+.game-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.prompt-wrapper {
+  max-width: 600px;
+}
+
+.todo {
+  font-size: 0.5rem;
+}
+
+#prompt {
+  font-weight: bold;
+}
+
+#definition {
+  font-style: italic;
+}
