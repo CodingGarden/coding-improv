@@ -129,3 +129,10 @@ All features of the things we build are influenced by chat suggestions.
 - NFT Battleship
 - View the code [here](./episode_018)
 - View the live stream VOD on YouTube [here](https://youtu.be/V3Je_H4DDnc)
+
+## Episode 19
+
+- WASDoodle
+- View the code [here](./episode_019)
+- View the site [here](https://wasdoodle.surge.sh/)
+- View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/1622280183)
