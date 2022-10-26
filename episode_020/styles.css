@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition-duration: 1.5s;
+}
+
+.copyright {
+  bottom: 1rem;
+  left: 1rem;
+  position: absolute;
+  opacity: 0;
+  color: white;
+  padding: 1rem;
+  transition-duration: 1.5s;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.morgan {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  bottom: 0;
+  transition-duration: 1.5s;
+  width: 30%;
+}
+
+#startButton {
+  background: white;
+  outline: 3px solid black;
+  font-size: 4rem;
+  padding: 1rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
