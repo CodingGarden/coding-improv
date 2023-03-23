@@ -143,3 +143,10 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_020)
 - View the site [here](https://morgans-space-odyssey.surge.sh/)
 - View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/1635020219)
+
+## Episode 21
+
+- Advent of Birds
+- View the code [here](./episode_021)
+- View the site [here](https://advent-of-birds.surge.sh/)
+- View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/1668392938)
