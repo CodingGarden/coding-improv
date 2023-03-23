@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pikachu's Scavenger Hunt</title>
+  <STYLE>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      overflow: hidden;
+      display: grid;
+      place-content: center;
+      background: black;
+    }
+    .instructions {
+      margin-left: 100px;
+      font-family: monospace;
+      font-size: 16px;
+      color: white;
+    }
+
+    #game-items {
+      color: yellow;
+    }
+  </STYLE>
+</head>
+<body>
+  <div class="instructions">
+    <ul>
+      <li>you need to find: <span id="game-items"></span></li>
+      <li>enter a house to collect items</li>
+      <li>press i to see your inventory</li>
+    </ul>
+  </div>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
