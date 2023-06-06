@@ -150,3 +150,10 @@ All features of the things we build are influenced by chat suggestions.
 - View the code [here](./episode_021)
 - View the site [here](https://advent-of-birds.surge.sh/)
 - View the live stream VOD on Twitch [here](https://www.twitch.tv/videos/1668392938)
+
+## Episode 22
+
+- Pikachu's Scavenger Hunt
+- View the code [here](./episode_022)
+- View the site [here](http://pikachu-scavenger-hunt.surge.sh/)
+- View the live stream VOD on YouTube [here](https://youtu.be/V6wjkWbZIFI)
