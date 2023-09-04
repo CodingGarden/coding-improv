@@ -7,6 +7,8 @@
 
 */
 
+//the winners element
+const winnersElement = document.querySelector('#winners');
 const guesserElement = document.querySelector('#guesser');
 const randomWordElement = document.querySelector('#randomWord');
 const definitionElement = document.querySelector('#definition');
@@ -14,8 +16,12 @@ const gridElement = document.querySelector('.grid');
 
 let currentWord = '';
 let currentDefinition = '';
-let currentWinner = '';
+//it's false vefore the first reset, get set to false everytime
+//someone correctly guess and stays false until the next reset.
+let canGuess = false;
 const images = [];
+//the array of winners
+const winners=[];
 
 function updateGrid() {
   gridElement.innerHTML = '';
@@ -51,7 +57,8 @@ function resetGame({ word, definition }) {
   // reveal one letter of the definition every 10 seconds?
   currentWord = word;
   currentDefinition = definition;
-  currentWinner = '';
+  //after each reset the chat can start to guess again
+  canGuess=true;
   console.log(currentWord);
   guesserElement.textContent = '';
   randomWordElement.textContent = scrambleWord(word);
@@ -68,22 +75,46 @@ const client = new tmi.Client({
 
 client.connect();
 
+//function to get the string of winners. It can contain the same
+//winner multiple times if it guessed correctly multiple times.
+//It's not dinstinct so that everyone can see how many images can place.
+function getWinnersString(){
+  return winners.map(winner => winner.username).join(", ");
+}
+
 client.on('message', (channel, tags, message, self) => {
   if (!currentWord) return;
   const [command, ...args] = message.split(' ');
   if (command === '!guess') {
-    if (currentWinner) return;
+    //if canGuess it's false it means we are waiting for the game to
+    //reset either after a correct guess or the first time the page load
+    if (!canGuess) return;
     const guess = args.join(' ');
-    if (guess === currentWord) {
+    //lower casing the guess and the current word for case insensitivity
+    if (guess.toLowerCase() === currentWord.toLowerCase()) {
       console.log('WINNER!', guess, tags['display-name']);
       randomWordElement.textContent = currentWord;
       definitionElement.textContent = currentDefinition;
-      currentWinner = tags['user-id'];
+      //push the current winner to the array of winners. Adding userId
+      //to avoid cheating (like changing the display name) and the display
+      //name to show the list of winners.
+      winners.push({
+        userId: tags['user-id'],
+        username: tags['display-name']
+      })
+      //set the can guess to false
+      canGuess=false;
+      //recalculate and show the updated list of winners.
+      winnersElement.textContent=`Winners: ${getWinnersString()}`;
       guesserElement.textContent = `${tags['display-name']} has guessed:`;
+      //show the correct word and the guesser for 10 seconds than reset the game
+      setTimeout(()=> getRandomWord().then(resetGame),10000);
     } else {
       console.log('INCORRECT GUESS!', guess, tags['display-name']);
     }
-  } if (command === '!place' && tags['user-id'] === currentWinner) {
+  } if (command === '!place' && winners.map(winner => winner.userId).includes(tags['user-id'])) {
+    //it can enter here only if the command is !place and the id of
+    //the sender is in the winners array
     const [name, row, col] = args;
     images.push({
       src: 'images/bonsai.png',
@@ -91,7 +122,9 @@ client.on('message', (channel, tags, message, self) => {
       col: col || 5,
     });
     updateGrid();
-    getRandomWord()
-      .then(resetGame);
+    //remove one occurence of the "placer" from the winners array
+    winners.splice(winners.findIndex(elem => elem.userId === tags["user-id"]), 1);
+    //update the winners element
+    winnersElement.textContent=`Winners: ${getWinnersString()}`;
   }
 });
